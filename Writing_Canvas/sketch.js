@@ -54,7 +54,11 @@ function clearCanvas() {
 	setup() //this will clear the canvas
 }
 
-function submitData() {
+async function submitData() {
 	console.log(pixel_array)
+
+	responce = await fetch("http://localhost:5000/")
+	console.log(await responce.json());
+
 
 }
