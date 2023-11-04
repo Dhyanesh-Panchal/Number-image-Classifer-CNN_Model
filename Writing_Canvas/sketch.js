@@ -51,6 +51,10 @@ function clearCanvas() {
 	for (let i = 0; i < 28; i++) {
 		pixel_array[ i ] = new Array(28).fill(0);
 	}
+
+	// clear the number
+	number_span = document.getElementById('number')
+	number_span.textContent = ''
 	setup() //this will clear the canvas
 }
 
@@ -73,6 +77,11 @@ async function submitData() {
 		prediction_mat = classifier.predict(tensor_array).dataSync()
 		predicted_number = prediction_mat.indexOf(Math.max(...prediction_mat))
 		console.log(predicted_number)
+
+		// write the number on the screen
+		number_span = document.getElementById('number')
+		number_span.textContent = predicted_number
+
 	} catch (error) {
 		console.log(error);
 	}
