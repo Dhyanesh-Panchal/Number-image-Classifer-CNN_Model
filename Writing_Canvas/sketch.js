@@ -36,10 +36,10 @@ function draw() {
 function mouseDragged() {
 	// Add a mouseMoved event listener to draw a pixel at the current mouse position
 	fill(255);
+	stroke(255);
 	rect(mouseX - mouseX % 10, mouseY - mouseY % 10, 10, 10);
 	pixel_array[ Math.floor(mouseY / 10) ][ Math.floor(mouseX / 10) ] = 1
 	// console.log(pixel_array);	
-	redraw();
 }
 
 
@@ -54,11 +54,26 @@ function clearCanvas() {
 	setup() //this will clear the canvas
 }
 
+async function loadClassifierModel() {
+	console.log("load function called");
+	const model = await tf.loadLayersModel('./model.json');
+	return model
+}
+
 async function submitData() {
 	console.log(pixel_array)
 
-	responce = await fetch("http://localhost:5000/")
-	console.log(await responce.json());
-
-
-}
+	tensor_array = tf.tensor([].concat.apply([], pixel_array), [ 1, 28, 28, 1 ])
+	// tensor_array.reshape([ 28, 28, 1 ])
+	console.log(tensor_array.shape)
+	try {
+		// console.log("Inside the trycatch")
+		classifier = await loadClassifierModel()
+		// console.log(classifier)
+		prediction_mat = classifier.predict(tensor_array).dataSync()
+		predicted_number = prediction_mat.indexOf(Math.max(...prediction_mat))
+		console.log(predicted_number)
+	} catch (error) {
+		console.log(error);
+	}
+}	
