@@ -24,7 +24,7 @@ function setup() {
 		pixel_array[ i ] = new Array(28).fill(0);
 	}
 
-	console.log(pixel_array);
+	// console.log(pixel_array);
 }
 
 function draw() {
@@ -45,7 +45,7 @@ function mouseDragged() {
 
 function clearCanvas() {
 	// Clear the canvas and reset the pixel_array
-	console.log('Clear')
+	// console.log('Clear')
 	pixel_array = new Array(28);
 
 	for (let i = 0; i < 28; i++) {
@@ -59,17 +59,17 @@ function clearCanvas() {
 }
 
 async function loadClassifierModel() {
-	console.log("load function called");
+	// console.log("load function called");
 	const model = await tf.loadLayersModel('./model.json');
 	return model
 }
 
 async function submitData() {
-	console.log(pixel_array)
+	// console.log(pixel_array)
 
 	tensor_array = tf.tensor([].concat.apply([], pixel_array), [ 1, 28, 28, 1 ])
 	// tensor_array.reshape([ 28, 28, 1 ])
-	console.log(tensor_array.shape)
+	// console.log(tensor_array.shape)
 	try {
 		// console.log("Inside the trycatch")
 		classifier = await loadClassifierModel()
@@ -80,7 +80,7 @@ async function submitData() {
 
 		// write the number on the screen
 		number_span = document.getElementById('number')
-		number_span.textContent = predicted_number
+		number_span.innerHtml = predicted_number
 
 	} catch (error) {
 		console.log(error);

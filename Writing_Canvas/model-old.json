@@ -37,10 +37,10 @@
                                 28,
                                 1
                             ],
-                            "filters": 96,
+                            "filters": 48,
                             "kernel_size": [
-                                5,
-                                5
+                                3,
+                                3
                             ],
                             "strides": [
                                 1,
@@ -84,8 +84,8 @@
                             "dtype": "float32",
                             "filters": 48,
                             "kernel_size": [
-                                3,
-                                3
+                                5,
+                                5
                             ],
                             "strides": [
                                 1,
@@ -136,7 +136,7 @@
                             "name": "dense",
                             "trainable": true,
                             "dtype": "float32",
-                            "units": 32,
+                            "units": 112,
                             "activation": "relu",
                             "use_bias": true,
                             "kernel_initializer": {
@@ -234,32 +234,34 @@
     "weightsManifest": [
         {
             "paths": [
-                "group1-shard1of1.bin"
+                "group1-shard1of3.bin",
+                "group1-shard2of3.bin",
+                "group1-shard3of3.bin"
             ],
             "weights": [
                 {
                     "name": "conv2d/kernel",
                     "shape": [
-                        5,
-                        5,
+                        3,
+                        3,
                         1,
-                        96
+                        48
                     ],
                     "dtype": "float32"
                 },
                 {
                     "name": "conv2d/bias",
                     "shape": [
-                        96
+                        48
                     ],
                     "dtype": "float32"
                 },
                 {
                     "name": "conv2d_1/kernel",
                     "shape": [
-                        3,
-                        3,
-                        96,
+                        5,
+                        5,
+                        48,
                         48
                     ],
                     "dtype": "float32"
@@ -275,21 +277,21 @@
                     "name": "dense/kernel",
                     "shape": [
                         23232,
-                        32
+                        112
                     ],
                     "dtype": "float32"
                 },
                 {
                     "name": "dense/bias",
                     "shape": [
-                        32
+                        112
                     ],
                     "dtype": "float32"
                 },
                 {
                     "name": "dense_1/kernel",
                     "shape": [
-                        32,
+                        112,
                         10
                     ],
                     "dtype": "float32"
